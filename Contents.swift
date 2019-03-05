@@ -37,21 +37,38 @@ class LRUCache {
             }
         }
     }
-    func get(index: Int) -> Int {
-        if let obj = dictonary[index] {
-            // Extraer el valor anterior y Eliminando la Referencia
-            let  prev = obj.prev
-            let  next = obj.next
+    func get() -> Int {
+         if(dictonary.isEmpty){
+            return 0
+         }else {
+            let obj = head.next
+            let  prev = obj?.prev
+            let  next = obj?.next
             prev?.next = next
             next?.prev = prev
             head.next = obj
-            return obj.value
-            
-        } else {
-           return 0
+            return (obj?.value)!
         }
+        
+      
     }
 }
+
+var lru = LRUCache()
+
+lru.put(value: 1)
+lru.put(value: 2)
+lru.put(value: 3)
+
+lru.get()
+
+lru.get()
+
+lru.put(value: 1)
+lru.put(value: 2)
+
+
+lru.get()
 
 
 
